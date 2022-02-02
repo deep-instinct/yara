@@ -41,7 +41,7 @@ define_function(has_method_string)
 {
   SIZED_STRING* parsed_name;
   SIZED_STRING* method_name = sized_string_argument(1);
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   int64_t number_of_methods = get_integer(module, "number_of_methods");
 
   if (number_of_methods == YR_UNDEFINED)
@@ -66,7 +66,7 @@ define_function(has_method_and_class_string)
   SIZED_STRING* parsed_name;
   SIZED_STRING* class_name = sized_string_argument(1);
   SIZED_STRING* method_name = sized_string_argument(2);
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   int64_t number_of_methods = get_integer(module, "number_of_methods");
 
   if (number_of_methods == YR_UNDEFINED)
@@ -96,7 +96,7 @@ define_function(has_method_regexp)
 {
   SIZED_STRING* parsed_name;
   RE* regex = regexp_argument(1);
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   int64_t number_of_methods = get_integer(module, "number_of_methods");
 
   if (number_of_methods == YR_UNDEFINED)
@@ -120,7 +120,7 @@ define_function(has_method_and_class_regexp)
   SIZED_STRING* parsed_name;
   RE* class_regex = regexp_argument(1);
   RE* name_regex = regexp_argument(2);
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   int64_t number_of_methods = get_integer(module, "number_of_methods");
 
   if (number_of_methods == YR_UNDEFINED)
@@ -149,7 +149,7 @@ define_function(has_class_string)
 {
   SIZED_STRING* parsed_class;
   SIZED_STRING* class_name = sized_string_argument(1);
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   int64_t number_of_methods = get_integer(module, "number_of_methods");
 
   if (number_of_methods == YR_UNDEFINED)
@@ -172,7 +172,7 @@ define_function(has_class_regexp)
 {
   SIZED_STRING* parsed_class;
   RE* regex = regexp_argument(1);
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   int64_t number_of_methods = get_integer(module, "number_of_methods");
 
   if (number_of_methods == YR_UNDEFINED)

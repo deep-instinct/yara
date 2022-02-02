@@ -944,7 +944,7 @@ void macho_set_definitions(YR_OBJECT* object)
 
 define_function(file_index_type)
 {
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   int64_t type_arg = integer_argument(1);
 
   uint64_t nfat = get_integer(module, "nfat_arch");
@@ -966,7 +966,7 @@ define_function(file_index_type)
 
 define_function(file_index_subtype)
 {
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   int64_t type_arg = integer_argument(1);
   int64_t subtype_arg = integer_argument(2);
   uint64_t nfat = get_integer(module, "nfat_arch");
@@ -992,7 +992,7 @@ define_function(file_index_subtype)
 
 define_function(ep_for_arch_type)
 {
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   int64_t type_arg = integer_argument(1);
   uint64_t nfat = get_integer(module, "nfat_arch");
 
@@ -1017,7 +1017,7 @@ define_function(ep_for_arch_type)
 
 define_function(ep_for_arch_subtype)
 {
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   int64_t type_arg = integer_argument(1);
   int64_t subtype_arg = integer_argument(2);
   uint64_t nfat = get_integer(module, "nfat_arch");

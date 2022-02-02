@@ -1893,7 +1893,7 @@ define_function(valid_on)
 
 define_function(section_index_addr)
 {
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   YR_SCAN_CONTEXT* context = scan_context();
 
   int64_t offset;
@@ -1927,7 +1927,7 @@ define_function(section_index_addr)
 
 define_function(section_index_name)
 {
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
 
   char* name = string_argument(1);
 
@@ -1952,7 +1952,7 @@ define_function(exports)
   SIZED_STRING* search_name = sized_string_argument(1);
 
   SIZED_STRING* function_name = NULL;
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   PE* pe = (PE*) module->data;
 
   // If not a PE, return YR_UNDEFINED.
@@ -1984,7 +1984,7 @@ define_function(exports_regexp)
   RE* regex = regexp_argument(1);
 
   SIZED_STRING* function_name = NULL;
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   PE* pe = (PE*) module->data;
 
   // If not a PE, return YR_UNDEFINED.
@@ -2014,7 +2014,7 @@ define_function(exports_ordinal)
 {
   int64_t ordinal = integer_argument(1);
 
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   PE* pe = (PE*) module->data;
 
   // If not a PE, return YR_UNDEFINED.
@@ -2047,7 +2047,7 @@ define_function(exports_index_name)
   SIZED_STRING* search_name = sized_string_argument(1);
 
   SIZED_STRING* function_name = NULL;
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   PE* pe = (PE*) module->data;
 
   // If not a PE, return YR_UNDEFINED.
@@ -2078,7 +2078,7 @@ define_function(exports_index_ordinal)
 {
   int64_t ordinal = integer_argument(1);
 
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   PE* pe = (PE*) module->data;
 
   // If not a PE, return YR_UNDEFINED.
@@ -2111,7 +2111,7 @@ define_function(exports_index_regex)
   RE* regex = regexp_argument(1);
 
   SIZED_STRING* function_name = NULL;
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   PE* pe = (PE*) module->data;
 
   // If not a PE, return YR_UNDEFINED.
@@ -2273,7 +2273,7 @@ define_function(imports)
   char* dll_name = string_argument(1);
   char* function_name = string_argument(2);
 
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   PE* pe = (PE*) module->data;
 
   IMPORTED_DLL* imported_dll;
@@ -2310,7 +2310,7 @@ define_function(imports_ordinal)
   char* dll_name = string_argument(1);
   int64_t ordinal = integer_argument(2);
 
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   PE* pe = (PE*) module->data;
 
   IMPORTED_DLL* imported_dll;
@@ -2343,7 +2343,7 @@ define_function(imports_ordinal)
 
 define_function(imports_regex)
 {
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   PE* pe = (PE*) module->data;
 
   IMPORTED_DLL* imported_dll;
@@ -2379,7 +2379,7 @@ define_function(imports_dll)
 {
   char* dll_name = string_argument(1);
 
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   PE* pe = (PE*) module->data;
 
   IMPORTED_DLL* imported_dll;
@@ -2411,7 +2411,7 @@ define_function(imports_dll)
 
 define_function(locale)
 {
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   PE* pe = (PE*) module->data;
 
   uint64_t locale = integer_argument(1);
@@ -2439,7 +2439,7 @@ define_function(locale)
 
 define_function(language)
 {
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   PE* pe = (PE*) module->data;
 
   uint64_t language = integer_argument(1);
@@ -2468,7 +2468,7 @@ define_function(language)
 define_function(is_dll)
 {
   int64_t characteristics;
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
 
   if (is_undefined(module, "characteristics"))
     return_integer(YR_UNDEFINED);
@@ -2479,7 +2479,7 @@ define_function(is_dll)
 
 define_function(is_32bit)
 {
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   PE* pe = (PE*) module->data;
 
   if (pe == NULL)
@@ -2490,7 +2490,7 @@ define_function(is_32bit)
 
 define_function(is_64bit)
 {
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   PE* pe = (PE*) module->data;
 
   if (pe == NULL)
@@ -2557,29 +2557,29 @@ static uint64_t _rich_version(
 
 define_function(rich_version)
 {
-  return_integer(_rich_version(module(), integer_argument(1), YR_UNDEFINED));
+  return_integer(_rich_version(yara_module(), integer_argument(1), YR_UNDEFINED));
 }
 
 define_function(rich_version_toolid)
 {
   return_integer(
-      _rich_version(module(), integer_argument(1), integer_argument(2)));
+      _rich_version(yara_module(), integer_argument(1), integer_argument(2)));
 }
 
 define_function(rich_toolid)
 {
-  return_integer(_rich_version(module(), YR_UNDEFINED, integer_argument(1)));
+  return_integer(_rich_version(yara_module(), YR_UNDEFINED, integer_argument(1)));
 }
 
 define_function(rich_toolid_version)
 {
   return_integer(
-      _rich_version(module(), integer_argument(2), integer_argument(1)));
+      _rich_version(yara_module(), integer_argument(2), integer_argument(1)));
 }
 
 define_function(calculate_checksum)
 {
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   PE* pe = (PE*) module->data;
 
   uint64_t csum = 0;
@@ -2627,7 +2627,7 @@ define_function(calculate_checksum)
 
 define_function(rva_to_offset)
 {
-  YR_OBJECT* module = module();
+  YR_OBJECT* module = yara_module();
   PE* pe = (PE*) module->data;
 
   uint64_t rva;
