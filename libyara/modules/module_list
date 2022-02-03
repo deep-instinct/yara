@@ -2,6 +2,7 @@ MODULE(pe)
 MODULE(elf)
 MODULE(math)
 MODULE(time)
+MODULE(ole)
 
 #ifdef DOTNET_MODULE
 MODULE(dotnet)

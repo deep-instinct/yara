@@ -51,6 +51,7 @@ add_library(libyara STATIC libyara/modules/module_list
                            libyara/proc/linux.c
                            libyara/proc/mach.c
                            libyara/hash.c
+                           libyara/modules/ole/ole.cpp
                            #libyara/tests.c
                            #cuckoo.c
                            #hash
@@ -59,7 +60,7 @@ add_library(libyara STATIC libyara/modules/module_list
 target_compile_options(libyara PRIVATE "${TURN_OFF_WARNINGS_COMPILE_FLAGS}")
 target_include_directories(libyara PUBLIC libyara/include
                                    PRIVATE libyara)
-target_link_libraries(libyara ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(libyara ${CMAKE_THREAD_LIBS_INIT} Pole)
 
 if (WIN32)
     set_target_properties(libyara PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
