@@ -211,7 +211,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define regexp_argument(n) ((RE*) (__args[n - 1].re))
 
 #define yara_module()       yr_object_get_root((YR_OBJECT*) __function_obj)
-#define parent()       (__function_obj->parent)
+#define yara_parent()       (__function_obj->parent)
 #define scan_context() (__context)
 
 #define foreach_memory_block(iterator, block)            \

@@ -1877,16 +1877,16 @@ define_function(valid_on)
   int64_t not_before;
   int64_t not_after;
 
-  if (is_undefined(parent(), "not_before") ||
-      is_undefined(parent(), "not_after"))
+  if (is_undefined(yara_parent(), "not_before") ||
+      is_undefined(yara_parent(), "not_after"))
   {
     return_integer(YR_UNDEFINED);
   }
 
   timestamp = integer_argument(1);
 
-  not_before = get_integer(parent(), "not_before");
-  not_after = get_integer(parent(), "not_after");
+  not_before = get_integer(yara_parent(), "not_before");
+  not_after = get_integer(yara_parent(), "not_after");
 
   return_integer(timestamp >= not_before && timestamp <= not_after);
 }
