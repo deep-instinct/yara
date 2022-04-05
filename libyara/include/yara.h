@@ -30,7 +30,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef YR_YARA_H
 #define YR_YARA_H
 
+// Disable compiler warning C4324 for Windows builds
+#if DI_OS_IDENTIFIER==1
+#pragma warning(push)
+#pragma warning(disable : 4324)
 #include "yara/compiler.h"
+#pragma warning(pop)
+#else
+#include "yara/compiler.h"
+#endif
+
 #include "yara/error.h"
 #include "yara/filemap.h"
 #include "yara/hash.h"

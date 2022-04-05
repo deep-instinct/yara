@@ -57,7 +57,8 @@ add_library(libyara STATIC libyara/modules/module_list
                            #hash
 )
 
-target_compile_options(libyara PRIVATE "${TURN_OFF_WARNINGS_COMPILE_FLAGS}")
+target_compile_options(libyara PRIVATE ${TURN_OFF_WARNINGS_AS_ERRORS_COMPILE_FLAG}
+                                       ${NO_WARNINGS_COMPILE_FLAG})
 target_include_directories(libyara PUBLIC libyara/include
                                    PRIVATE libyara)
 target_link_libraries(libyara ${CMAKE_THREAD_LIBS_INIT} Pole)
